@@ -4,85 +4,27 @@ const Schema = mongoose.Schema;
 // set imgUrl true in production
 const formSchema = new Schema(
   {
-    category: {
+    projectTitle: {
       type: String,
-      enum: [
-        "Commercial",
-        "R&D Institute",
-        "Research Student (Internal/External)",
-        "Internal UG/PG students",
-      ],
-      required: true,
-    },
-    unit: {
-      type: Array,
-      required: true,
+      required: true
     },
     name: {
       type: String,
-      required: true,
+      required: true
     },
-    userId: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-    },
-    imgUrl: {
-      type: String,
-      required: false,
-    },
-    uniqueId: {
+    departmentAndYear: {
       type: String,
       required: true,
     },
-    institute: {
+    admissionNo: {
       type: String,
       required: true,
     },
-    gender: {
+    email: {
       type: String,
       required: true,
     },
-    address: {
-      type: String,
-      required: true,
-    },
-    contact: {
-      email: {
-        type: String,
-        required: true,
-      },
-      mobile: {
-        type: Number,
-        required: true,
-      },
-    },
-    sourceOfFunding: {
-      type: String,
-      required: false,
-    },
-    projectTitle: {
-      type: String,
-      required: true,
-    },
-    projectObjective: {
-      type: String,
-      required: true,
-    },
-    ideaOfProject: {
-      origin: {
-        type: String,
-        required: true,
-      },
-      methodology: {
-        type: String,
-        required: true,
-      },
-      outcome: {
-        type: String,
-        required: true,
-      },
-    },
-    timeOfCompletion: {
+    mobile: {
       type: String,
       required: true,
     },
@@ -90,48 +32,74 @@ const formSchema = new Schema(
       type: String,
       required: false,
     },
-    member: [
-      {
-        name: {
-          type: String,
-          required: true,
-        },
-        imgUrl: {
-          type: String,
-          required: false,
-        },
-        uniqueId: {
-          type: String,
-          required: true,
-        },
-        institute: {
-          type: String,
-          required: true,
-        },
-        address: {
-          type: String,
-          required: true,
-        },
-        email: {
-          type: String,
-          required: true,
-        },
-        mobile: {
-          type: Number,
-          required: true,
-        },
-        gender: {
-          type: String,
-          required: true,
-        },
+    domain: {
+      type: String,
+      enum: ["Robotic Technology",
+      "Electronics and IoT",
+      "Animation and Game Design",
+      "Electric Mobility",
+      "Aeronautics and Space Technology",
+      "Smart Manufacturing",
+      "Financial Technology",
+      "Data and Software Technology"],
+      required: true,
+    },
+    summary: {
+      type: String,
+      required: true,
+    },
+    objectives: {
+      type: String,
+      required: true,
+    },
+    background: {
+      type: String,
+      required: true,
+    },
+    significance: {
+      type: String,
+      required: true,
+    },
+    technologyGap: {
+      type: String,
+      required: true,
+    },
+    methodology: {
+      type: String,
+      required: true,
+    },
+    outcome: {
+      type: String,
+      required: true,
+    },
+    units: [{
+      type: Strings,
+      required: true,
+    }],
+    roleOfMembers: {
+      type: String,
+      required: true,
+    },
+    expenses: [{
+      head: {
+        type: String,
+        required: true,
       },
-    ],
+      number: {
+        type: String,
+        required: true,
+      },
+      cost: {
+        type: Number,
+        required: true, 
+      }
+    }],
     status: {
       type: String,
       default: "Pending",
     },
     comments: [{
-      type: String 
+      type: String,
     }]
   },
   {

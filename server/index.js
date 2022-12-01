@@ -28,7 +28,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 const port = process.env.PORT || 8080;
-const dbURL = process.env.DBURL || "mongodb://localhost:27017/nvcti-lab";
+const dbURL = process.env.DBURL || "mongodb://localhost:27017/nvcti-pdi";
 
 mongoose
   .connect(dbURL)
