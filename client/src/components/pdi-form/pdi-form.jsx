@@ -21,7 +21,6 @@ import {
   InputLabel,
   Divider,
 } from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
 import Wrapper from "./pdi-form.styles";
 import { CircularLoader } from "..";
 import Member from "./member";
@@ -37,18 +36,18 @@ const NVCTIunit = [
 
 const PdiApplicationForm = () => {
   const navigate = useNavigate();
-  const [cost, setCost] = useState("");
   const [unit, setUnit] = useState([false, false, false, false, false]);
+  const [totalCost, setTotalCost] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const { token } = useSelector((store) => store.user.user);
 
+  const [cost, setCost] = useState([
+    { number: "", cost: "" },
+    { number: "", cost: "" },
+    { number: "", cost: "" },
+  ]);
   const [data, setData] = useState({
     projectTitle: "",
-    // name: "",
-    // departmentAndYear: "",
-    // admissionNo: "",
-    // email: "",
-    // mobile: "",
     mentor: "",
     domain: "Robotic Technology",
     summary: "",
@@ -63,6 +62,7 @@ const PdiApplicationForm = () => {
   });
 
   const handleChange = (prop) => (event) => {
+    console.log(prop, event.target.value);
     setData({ ...data, [prop]: event.target.value });
   };
 
@@ -72,7 +72,7 @@ const PdiApplicationForm = () => {
   };
 
   const [memberCount, setMemberCount] = useState(0);
-  const [applicants, setApplicants] = useState([]);
+  // const [applicants, setApplicants] = useState([]);
   const [member1, setMember1] = useState({
     name: "",
     departmentAndYear: "",
@@ -106,9 +106,26 @@ const PdiApplicationForm = () => {
     setMember3({ ...member3, [prop]: event.target.value });
   };
 
-  const something = () => {
-    setApplicants([new Set(...applicants, member1, member2, member3)]);
-  };
+  // const something = () => {
+  //   setApplicants([new Set(...applicants, member1, member2, member3)]);
+  // };
+
+  const handleCost = (e, idx) => {
+    let newArr = cost.map((el, index) => {
+      let obj = el;
+      if(index === idx){
+        obj = {...obj, [e.target.name]: e.target.value};
+      }
+      return obj;
+    });
+    console.log(newArr);
+    let total = 0;
+    newArr.forEach(el => {
+      total += el.number*el.cost;
+    })
+    setTotalCost(total);
+    setCost(newArr);
+  }
 
   const handleSubmit = async () => {
     try {
@@ -117,14 +134,17 @@ const PdiApplicationForm = () => {
       unitObj = unitObj.filter((e) => {
         if (e) return e;
       });
-      something();
-
+      // something();
+      const members = [];
+      if(memberCount >= 1) members.push(member1);
+      if(memberCount >= 2) members.push(member2);
+      if(memberCount >= 3) members.push(member3);
       const obj = {
         units: unitObj,
-        applicants: applicants,
         ...data,
+        members,
+        expenses: cost,
       };
-
       // To check if the object has all the required fields are filled!
 
       // console.log(obj);
@@ -134,11 +154,13 @@ const PdiApplicationForm = () => {
       toast.success("Form submitted successfully !");
     } catch (err) {
       setIsLoading(false);
+      console.log(err);
       toast.error("Something went wrong while submitting !");
     }
   };
 
-    console.log(applicants);
+  // console.log("rr = ", cost);
+  // console.log(applicants);
 
   return (
     <Wrapper sx={{ width: { lg: "75%", md: "80%", sm: "85%", xs: "95%" } }}>
@@ -149,19 +171,19 @@ const PdiApplicationForm = () => {
           gutterBottom
           align="center"
           color="primary"
-          fontSize={30}
+          fontSize={40}
         >
           Naresh Vashisht Centre for Tinkering and Innovation Indian School of
           Technology (Indian School of Mines) Dhanbad
         </Typography>
-        <Typography
+        {/* <Typography
           variant="h5"
           gutterBottom
           align="center"
           sx={{ textDecoration: "underline" }}
         >
           Proposal Format
-        </Typography>
+        </Typography> */}
         <Typography variant="h5" gutterBottom align="center">
           Minor In <br />
           <strong style={{ fontSize: "35px" }}> Product Development</strong>
@@ -195,6 +217,37 @@ const PdiApplicationForm = () => {
         <Typography variant="h6" gutterBottom align="left" sx={{ mb: 2 }}>
           2. Details of the Applicant(s):
         </Typography>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: { xs: "column", sm: "row" },
+            gap: "10px",
+            justifyContent: "space-between",
+            p: 2,
+          }}
+        >
+          <Typography variant="span">
+            (In case of a team, please add same details for each member by
+            clicking the "plus" icon below.)
+          </Typography>
+          <FormControl fullWidth size="small">
+            <InputLabel id="leader-team-select">No. of Team Members</InputLabel>
+            <Select
+              labelId="leader-team-select"
+              id="demo-simple-select"
+              value={memberCount}
+              required
+              onChange={(e) => setMemberCount(e.target.value)}
+              label="No. of team member"
+              fullWidth
+              defaultValue={1}
+            >
+              <MenuItem value={1}>1</MenuItem>
+              <MenuItem value={2}>2</MenuItem>
+              <MenuItem value={3}>3</MenuItem>
+            </Select>
+          </FormControl>
+        </Box>
         <Grid container spacing={2} sx={{ mb: 2 }}>
           <Grid item xs={12} sm={6}>
             <Typography>
@@ -300,36 +353,6 @@ const PdiApplicationForm = () => {
           />
         </Grid>
         <Divider />
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: { xs: "column", sm: "row" },
-            gap: "10px",
-            justifyContent: "space-between",
-            p: 2,
-          }}
-        >
-          <Typography variant="span">
-            (In case of a team, please add same details for each member by
-            clicking the "plus" icon below.)
-          </Typography>
-          <FormControl fullWidth size="small">
-            <InputLabel id="leader-team-select">No. of Team Members</InputLabel>
-            <Select
-              labelId="leader-team-select"
-              id="demo-simple-select"
-              value={memberCount}
-              required
-              onChange={(e) => setMemberCount(e.target.value)}
-              label="No. of team member"
-              fullWidth
-            >
-              <MenuItem value={0}>0</MenuItem>
-              <MenuItem value={1}>1</MenuItem>
-              <MenuItem value={2}>2</MenuItem>
-            </Select>
-          </FormControl>
-        </Box>
       </Paper>
 
       <Paper elevation={3} sx={{ mt: 4, p: 3 }}>
@@ -369,8 +392,9 @@ const PdiApplicationForm = () => {
               <Select
                 labelId="leader-domain-select"
                 id="demo-simple-select"
-                value="Robotic Technology"
                 required
+                name="domain"
+                value={data.domain}
                 onChange={handleChange("domain")}
                 label="Domain"
                 fullWidth
@@ -711,9 +735,8 @@ const PdiApplicationForm = () => {
               size="small"
               name="number"
               type="text"
-              // value={data.departmentAndYear}
-              // onChange={handleApplicant("departmentAndYear")}
-              label="Number"
+              value={cost[0].number}
+              onChange={(e) => handleCost(e,0)}
               required
               fullWidth
               color="primary"
@@ -724,9 +747,8 @@ const PdiApplicationForm = () => {
               size="small"
               type="number"
               name="cost"
-              // value={data.departmentAndYear}
-              // onChange={handleApplicant("departmentAndYear")}
-              label="Cost in Rupees"
+              value={cost[0].cost}
+              onChange={(e) => handleCost(e,0)}
               required
               fullWidth
               color="primary"
@@ -741,9 +763,8 @@ const PdiApplicationForm = () => {
               size="small"
               name="number"
               type="text"
-              // value={data.departmentAndYear}
-              // onChange={handleApplicant("departmentAndYear")}
-              label="Number"
+              value={cost[1].number}
+              onChange={(e) => handleCost(e,1)}
               required
               fullWidth
               color="primary"
@@ -754,9 +775,8 @@ const PdiApplicationForm = () => {
               size="small"
               name="cost"
               type="number"
-              // value={data.departmentAndYear}
-              // onChange={handleApplicant("departmentAndYear")}
-              label="Cost in Rupees"
+              value={cost[1].cost}
+              onChange={(e) => handleCost(e,1)}
               required
               fullWidth
               color="primary"
@@ -770,9 +790,8 @@ const PdiApplicationForm = () => {
               size="small"
               name="number"
               type="text"
-              // value={data.departmentAndYear}
-              // onChange={handleApplicant("departmentAndYear")}
-              label="Number"
+              value={cost[2].number}
+              onChange={(e) => handleCost(e,2)}
               required
               fullWidth
               color="primary"
@@ -783,9 +802,8 @@ const PdiApplicationForm = () => {
               size="small"
               name="cost"
               type="number"
-              // value={data.departmentAndYear}
-              // onChange={handleApplicant("departmentAndYear")}
-              label="Cost in Rupees"
+              value={cost[2].cost}
+              onChange={(e) => handleCost(e,2)}
               required
               fullWidth
               color="primary"
@@ -801,8 +819,7 @@ const PdiApplicationForm = () => {
               name="cost"
               type="text"
               disabled
-              // value={data.departmentAndYear}
-              // onChange={handleApplicant("departmentAndYear")}
+              value={totalCost}
               required
               fullWidth
               color="primary"

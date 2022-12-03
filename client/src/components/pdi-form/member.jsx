@@ -10,7 +10,7 @@ const Member = ({
 }) => {
   return (
     <>
-      {memberCount === 1 && (
+      {memberCount === 2 && (
         <>
           <Grid item xs={12}>
             <Divider />
@@ -112,7 +112,7 @@ const Member = ({
           </Grid>
         </>
       )}
-      {memberCount === 2 && (
+      {memberCount === 3 && (
         <>
           <Grid item xs={12}>
             <Divider />

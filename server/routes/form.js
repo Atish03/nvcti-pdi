@@ -32,11 +32,7 @@ router.route("/submit").post(
     // console.log(req.body);
     const {
       projectTitle,
-      name,
-      departmentAndYear,
-      admissionNo,
-      email,
-      mobile,
+      members,
       mentor,
       domain,
       summary,
@@ -53,11 +49,7 @@ router.route("/submit").post(
     const userId = req.user._id;
     const newForm = new Form({
       projectTitle,
-      name,
-      departmentAndYear,
-      admissionNo,
-      email,
-      mobile,
+      members,
       mentor,
       domain,
       summary,
