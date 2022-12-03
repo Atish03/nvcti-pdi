@@ -22,7 +22,7 @@ import {
   VerifyEmail,
   FormApplication,
 } from "./pages";
-import { ViewFormApplication } from "./components";
+import { ViewFormApplication , PdiApplicationForm} from "./components";
 
 function App() {
   return (
@@ -66,6 +66,7 @@ function App() {
           >
             <Route index element={<ClientDashboard />} />
             <Route path="apply" element={<FormApplication />} />
+            <Route path="pdi" element={<PdiApplicationForm />} />
           </Route>
 
           {/* ADMIN PROTECTED ROUTES */}
@@ -106,6 +107,7 @@ function App() {
 
           {/* ERROR ROUTE */}
           <Route exact path="*" element={<Error />}></Route>
+
         </Routes>
         <ToastContainer
           position="top-left"
@@ -113,10 +115,11 @@ function App() {
           hideProgressBar={false}
           newestOnTop
           closeOnClick
+          pauseOnHover={false}
+          pauseOnFocusLoss={false}
           rtl={false}
-          limit={1}
+          limit={2}
           draggable
-          pauseOnHover
         />
         <Footer />
       </ThemeProvider>

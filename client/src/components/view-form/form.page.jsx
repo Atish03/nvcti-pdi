@@ -33,7 +33,7 @@ const ViewFormApplication = () => {
   const { formId } = useParams();
   const navigate = useNavigate();
   const { position, token } = useSelector((store) => store.user.user);
-  // console.log("userPos", position);
+  console.log("userPos", position);
   // console.log(formId);
   const [event, setEvent] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -502,5 +502,6 @@ const ViewFormApplication = () => {
     </Wrapper>
   );
 };
+
 
 export default ViewFormApplication;

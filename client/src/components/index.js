@@ -20,6 +20,8 @@ import MentorDashboardNavbar from "./dashboard-navbar/mentor-dashboard-navbar.co
 import SuperAdminDashboardNavbar from "./dashboard-navbar/superAdmin-dashboard-navbar.component";
 
 
+import PdiApplicationForm from "./pdi-form/pdi-form";
+
 export {
   CircularLoader,
   NVCTILogo,
@@ -34,4 +36,5 @@ export {
   Footer,
   ApplicationsList,
   ViewFormApplication,
+  PdiApplicationForm,
 };

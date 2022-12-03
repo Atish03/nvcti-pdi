@@ -73,7 +73,7 @@ const formSchema = new Schema(
       required: true,
     },
     units: [{
-      type: Strings,
+      type: String,
       required: true,
     }],
     roleOfMembers: {

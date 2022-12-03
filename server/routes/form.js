@@ -75,8 +75,8 @@ router.route("/submit").post(
     const user = await User.findById(userId);
     user.formSubmitted.push(newForm._id);
     await user.save();
-    // change adminId for the id in mongodb
-    const adminId = '636947907d962995838c3a69'
+    // change adminId for the id in mongodbmo
+    const adminId = "6389af2b877d8f0375fec470";
     const admin = await Evaluator.findById(adminId);
     admin.applicants.push(newForm._id);
     await admin.save()
