@@ -6,42 +6,48 @@ const formSchema = new Schema(
   {
     projectTitle: {
       type: String,
-      required: true
-    },
-    name: {
-      type: String,
-      required: true
-    },
-    departmentAndYear: {
-      type: String,
       required: true,
     },
-    admissionNo: {
-      type: String,
-      required: true,
-    },
-    email: {
-      type: String,
-      required: true,
-    },
-    mobile: {
-      type: String,
-      required: true,
-    },
+    members: [
+      {
+        name: {
+          type: String,
+          required: true,
+        },
+        departmentAndYear: {
+          type: String,
+          required: true,
+        },
+        admissionNo: {
+          type: String,
+          required: true,
+        },
+        email: {
+          type: String,
+          required: true,
+        },
+        mobile: {
+          type: String,
+          required: true,
+        },
+      },
+    ],
     mentor: {
       type: String,
       required: false,
     },
     domain: {
       type: String,
-      enum: ["Robotic Technology",
-      "Electronics and IoT",
-      "Animation and Game Design",
-      "Electric Mobility",
-      "Aeronautics and Space Technology",
-      "Smart Manufacturing",
-      "Financial Technology",
-      "Data and Software Technology"],
+      enum: [
+        "Robotic Technology",
+        "Electronics and IoT",
+        "Animation and Game Design",
+        "Electric Mobility",
+        "Aeronautics and Space Technology",
+        "Smart Manufacturing",
+        "Financial Technology",
+        "Data and Software Technology",
+      ],
       required: true,
     },
     summary: {
@@ -72,35 +78,37 @@ const formSchema = new Schema(
       type: String,
       required: true,
     },
-    units: [{
-      type: String,
-      required: true,
-    }],
+    units: [
+      {
+        type: String,
+        required: true,
+      },
+    ],
     roleOfMembers: {
       type: String,
       required: true,
     },
-    expenses: [{
-      head: {
-        type: String,
-        required: true,
+    expenses: [
+      {
+        number: {
+          type: String,
+          required: true,
+        },
+        cost: {
+          type: Number,
+          required: true,
+        },
       },
-      number: {
-        type: String,
-        required: true,
-      },
-      cost: {
-        type: Number,
-        required: true, 
-      }
-    }],
+    ],
     status: {
       type: String,
       default: "Pending",
     },
-    comments: [{
-      type: String,
-    }]
+    comments: [
+      {
+        type: String,
+      },
+    ],
   },
   {
     timestamps: {
