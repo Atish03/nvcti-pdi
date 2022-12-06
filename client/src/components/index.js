@@ -8,6 +8,7 @@ import NVCTILogo from "./logo/logo.component";
 import CircularLoader from "./loader/circular-loader.component";
 import PreviousApplications from "./previous-status-table/previous-state-table.component";
 import ViewFormApplication from "./view-form/form.page";
+import StatusPill from "./status-pill/status-pill.component";
 
 // ADMIN
 import AdminDashboardNavbar from "./dashboard-navbar/admin-dashboard-navbar.component";
@@ -23,6 +24,7 @@ import SuperAdminDashboardNavbar from "./dashboard-navbar/superAdmin-dashboard-n
 import PdiApplicationForm from "./pdi-form/pdi-form";
 
 export {
+  StatusPill,
   CircularLoader,
   NVCTILogo,
   LogIn,

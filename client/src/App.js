@@ -11,16 +11,15 @@ import {
   ClientDashboard,
   AdminDashboard,
   MentorDashboard,
-  SuperAdminDashboard,
   HomePage,
   SharedLayoutAdmin,
   SharedLayoutClient,
   SharedLayoutMentor,
-  SharedLayoutSuperAdmin,
   Contact,
   Navbar,
   VerifyEmail,
   FormApplication,
+  MentorAcceptedDashboard,
 } from "./pages";
 import { ViewFormApplication , PdiApplicationForm} from "./components";
 
@@ -79,6 +78,7 @@ function App() {
             }
           >
             <Route index element={<AdminDashboard />} />
+            <Route path="selected" element={<MentorAcceptedDashboard />} />
           </Route>
 
           {/* MENTOR PROTECTED ROUTES */}
@@ -91,18 +91,6 @@ function App() {
             }
           >
             <Route index element={<MentorDashboard />} />
-          </Route>
-
-          {/* SUPER-ADMIN PROTEDTED ROUTES */}
-          <Route
-            path="/superadmin"
-            element={
-              <ProtectedRoutes userRole="superAdmin">
-                <SharedLayoutSuperAdmin />
-              </ProtectedRoutes>
-            }
-          >
-            <Route index element={<SuperAdminDashboard />} />
           </Route>
 
           {/* ERROR ROUTE */}

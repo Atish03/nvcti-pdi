@@ -90,12 +90,12 @@ const ApplicationsList = ({ events, role, ...props }) => {
       }
       // console.log(emailId, applicants);
       await customFetch.post(
-        "/evaluator/forwardsuperadmin",
+        "/evaluator/forwardadmin",
         { applicants },
         authHeader(token)
       );
       setSelected(selectInitialState);
-      toast.success("Forwarded to super Admin successfully !");
+      toast.success("Forwarded to Admin successfully !");
     } catch (err) {
       console.log(err);
       toast.error(err.message);
@@ -175,7 +175,7 @@ const ApplicationsList = ({ events, role, ...props }) => {
               sx={{ mr: "2em" }}
               onClick={handleSuperAdminMail}
             >
-              Forward to Super Admin
+              Forward to Admin
             </Button>
           )}
         </Box>

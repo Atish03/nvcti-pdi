@@ -55,6 +55,13 @@ export const AdminDashboardNavbar = (props) => {
           {/* NAVBAR LOGO */}
           <NVCTILogo />
           <Box sx={{ flexGrow: 1 }} />
+          <Button
+              variant="contained"
+              onClick={() => navigate("selected")}
+              sx={{ mr: 2 }}
+            >
+              Mentor Selected
+            </Button>
           {pathname !== "/admin" && (
             <Button
               variant="contained"

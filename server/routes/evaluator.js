@@ -122,12 +122,25 @@ router.route("/addcomment").post(
   })
 )
 
+router.route("/getacceptedforms").get(
+  isLoggedIn,
+  isAdmin,
+  catchAsync(async (req, res) => {
+    const adminId = "638f5718bfc8f675af102b75"; 
+    const admin = await Evaluator.findById(adminId);
+    const resp = await Form.find({"_id": {$in: admin.applicants}, finalist: true});
+    const dummy_resp = [{_id: "dlfddf88f11f", projectTitle: "Dummy title", domain: "Electronics and IoT"},
+    {_id: "dlfddf88f11f", projectTitle: "Tummy title", domain: "Data and Software Technology"}];
+    res.status(200).send({applications: dummy_resp});
+  })
+)
+
 router.route("/forwardadmin").post(
   isLoggedIn,
   isAdmin,
   catchAsync(async (req, res) => {
     const { applicants } = req.body;
-    for (applicant of applicants) {
+    for (let applicant of applicants) {
       let form = await Form.findById(applicant);
       form.finalist = true;
       await form.save();
