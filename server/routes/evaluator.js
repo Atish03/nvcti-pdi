@@ -111,21 +111,6 @@ router.route("/forward").post(
   })
 );
 
-router.route("/forwardsuperadmin").post(
-  isLoggedIn,
-  isAdmin,
-  catchAsync(async (req, res) => {
-    const { applicants } = req.body;
-    const applicantIds = applicants.map((id) => mongoose.Types.ObjectId(id));
-    const superAdmin = await Evaluator.findOne({
-      userId: "636d2c104e2cb9ed9e8a93a2",
-    });
-    applicantIds.forEach((id) => superAdmin.applicants.push(id));
-    await superAdmin.save();
-    res.status(200).send({ msg: "Forwarded successfully !" });
-  })
-);
-
 router.route("/addcomment").post(
   isLoggedIn,
   isAdmin,
@@ -134,6 +119,20 @@ router.route("/addcomment").post(
     form.comments.push(req.body.comment);
     await form.save()
     res.status(200).send({ msg: "Comment added successfully!" });
+  })
+)
+
+router.route("/forwardadmin").post(
+  isLoggedIn,
+  isAdmin,
+  catchAsync(async (req, res) => {
+    const { applicants } = req.body;
+    for (applicant of applicants) {
+      let form = await Form.findById(applicant);
+      form.finalist = true;
+      await form.save();
+    } 
+    res.status(200).send({ msg: "Applicants forwarded to admin successfully" });
   })
 )
 

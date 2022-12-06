@@ -109,6 +109,10 @@ const formSchema = new Schema(
         type: String,
       },
     ],
+    finalist: {
+      type: Boolean,
+      default: false
+    }
   },
   {
     timestamps: {
