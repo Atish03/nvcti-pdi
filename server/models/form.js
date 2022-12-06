@@ -109,13 +109,7 @@ const formSchema = new Schema(
         type: String,
       },
     ],
-    superadminComments: [{
-      type: String
-    }],
-    forwardedBy: [{
-      type: String
-    }],
-    reEvaluation: {
+    finalist: {
       type: Boolean,
       default: false
     }

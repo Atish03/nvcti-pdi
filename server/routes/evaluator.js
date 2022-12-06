@@ -111,21 +111,6 @@ router.route("/forward").post(
   })
 );
 
-router.route("/forwardsuperadmin").post(
-  isLoggedIn,
-  isAdmin,
-  catchAsync(async (req, res) => {
-    const { applicants } = req.body;
-    const applicantIds = applicants.map((id) => mongoose.Types.ObjectId(id));
-    const superAdmin = await Evaluator.findOne({
-      userId: "636d2c104e2cb9ed9e8a93a2",
-    });
-    applicantIds.forEach((id) => superAdmin.applicants.push(id));
-    await superAdmin.save();
-    res.status(200).send({ msg: "Forwarded successfully !" });
-  })
-);
-
 router.route("/addcomment").post(
   isLoggedIn,
   isAdmin,
@@ -137,34 +122,17 @@ router.route("/addcomment").post(
   })
 )
 
-router.route("/adminComment").post(
+router.route("/forwardadmin").post(
   isLoggedIn,
   isAdmin,
   catchAsync(async (req, res) => {
-    const form = await Form.findById(req.body.formId);
-    form.superadminComments.push(req.body.comment);
-    await form.save()
-    res.status(200).send({ msg: "Comment added successfully!" });
-  })
-)
-
-router.route("/revert").post(
-  isLoggedIn,
-  isAdmin,
-  catchAsync(async (req, res) => {
-    const form = await Form.findById(req.body.applicationId);
-    form.reEvaluation = true;
-    await form.save();
-    var textmsg = "Some applications need to be re-evaluated please login to view them";
-    for (var mail of form.forwardedBy) {
-      await sendMail({
-        to_email: mail,
-        subject_email: "rechecking some applications",
-        text_email: textmsg,
-        html_email: null,
-      });
-    }
-    res.status(200).send({ msg: "The form has been reverted to the mentors" });
+    const { applicants } = req.body;
+    for (applicant of applicants) {
+      let form = await Form.findById(applicant);
+      form.finalist = true;
+      await form.save();
+    } 
+    res.status(200).send({ msg: "Applicants forwarded to admin successfully" });
   })
 )
 
