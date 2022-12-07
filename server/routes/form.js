@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Form = require("../models/form");
 const User = require("../models/user");
-const Evaluator = require("../models/evaluator")
+const Evaluator = require("../models/evaluator");
 const { isLoggedIn, isAuthor } = require("../middleware");
 const catchAsync = require("../utilities/catchAsync");
 
@@ -24,7 +24,7 @@ router.route("/getforms/:userId").get(
     const enrolled = await User.findById(userId).populate("formSubmitted");
     res.status(200).send(enrolled);
   })
-)
+);
 
 router.route("/submit").post(
   isLoggedIn,
@@ -44,7 +44,10 @@ router.route("/submit").post(
       outcome,
       units,
       roleOfMembers,
-      expenses
+      expenses,
+      course,
+      semester,
+      session
     } = req.body;
     const userId = req.user._id;
     const newForm = new Form({
@@ -59,9 +62,12 @@ router.route("/submit").post(
       technologyGap,
       methodology,
       outcome,
-      units,  
+      units,
       roleOfMembers,
-      expenses
+      expenses,
+      course,
+      semester,
+      session
     });
     await newForm.save();
     const user = await User.findById(userId);
@@ -71,7 +77,7 @@ router.route("/submit").post(
     const adminId = "6389af2b877d8f0375fec470";
     const admin = await Evaluator.findById(adminId);
     admin.applicants.push(newForm._id);
-    await admin.save()
+    await admin.save();
     res.status(200).send({ msg: "Form submitted successfully !" });
   })
 );

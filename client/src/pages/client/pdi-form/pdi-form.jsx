@@ -1,7 +1,7 @@
 import { useState } from "react";
 import React from "react";
-import customFetch from "../../utils/axios";
-import authHeader from "../../utils/userAuthHeaders";
+import customFetch from "../../../utils/axios";
+import authHeader from "../../../utils/userAuthHeaders";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -22,7 +22,7 @@ import {
   Divider,
 } from "@mui/material";
 import Wrapper from "./pdi-form.styles";
-import { CircularLoader } from "..";
+import CircularLoader from "../../../components/loader/circular-loader.component";
 import Member from "./member";
 import { useSelector } from "react-redux";
 
@@ -58,6 +58,9 @@ const PdiApplicationForm = () => {
     methodology: "",
     outcome: "",
     roleOfMembers: "",
+    course: "",
+    session: "",
+    semester: "Monsoon",
     // expenses:""
   });
 
@@ -71,8 +74,7 @@ const PdiApplicationForm = () => {
     setUnit(units);
   };
 
-  const [memberCount, setMemberCount] = useState(0);
-  // const [applicants, setApplicants] = useState([]);
+  const [memberCount, setMemberCount] = useState(1);
   const [member1, setMember1] = useState({
     name: "",
     departmentAndYear: "",
@@ -106,26 +108,22 @@ const PdiApplicationForm = () => {
     setMember3({ ...member3, [prop]: event.target.value });
   };
 
-  // const something = () => {
-  //   setApplicants([new Set(...applicants, member1, member2, member3)]);
-  // };
-
   const handleCost = (e, idx) => {
     let newArr = cost.map((el, index) => {
       let obj = el;
-      if(index === idx){
-        obj = {...obj, [e.target.name]: e.target.value};
+      if (index === idx) {
+        obj = { ...obj, [e.target.name]: e.target.value };
       }
       return obj;
     });
     console.log(newArr);
     let total = 0;
-    newArr.forEach(el => {
-      total += el.number*el.cost;
-    })
+    newArr.forEach((el) => {
+      total += el.number * el.cost;
+    });
     setTotalCost(total);
     setCost(newArr);
-  }
+  };
 
   const handleSubmit = async () => {
     try {
@@ -134,11 +132,11 @@ const PdiApplicationForm = () => {
       unitObj = unitObj.filter((e) => {
         if (e) return e;
       });
-      // something();
+
       const members = [];
-      if(memberCount >= 1) members.push(member1);
-      if(memberCount >= 2) members.push(member2);
-      if(memberCount >= 3) members.push(member3);
+      if (memberCount >= 1) members.push(member1);
+      if (memberCount >= 2) members.push(member2);
+      if (memberCount >= 3) members.push(member3);
       const obj = {
         units: unitObj,
         ...data,
@@ -147,10 +145,10 @@ const PdiApplicationForm = () => {
       };
       // To check if the object has all the required fields are filled!
 
-      // console.log(obj);
-      await customFetch.post(`/form/submit`, obj, authHeader(token));
+      console.log(obj);
+      // await customFetch.post(`/form/submit`, obj, authHeader(token));
       setIsLoading(false);
-      navigate("/client");
+      // navigate("/client");
       toast.success("Form submitted successfully !");
     } catch (err) {
       setIsLoading(false);
@@ -176,14 +174,6 @@ const PdiApplicationForm = () => {
           Naresh Vashisht Centre for Tinkering and Innovation Indian School of
           Technology (Indian School of Mines) Dhanbad
         </Typography>
-        {/* <Typography
-          variant="h5"
-          gutterBottom
-          align="center"
-          sx={{ textDecoration: "underline" }}
-        >
-          Proposal Format
-        </Typography> */}
         <Typography variant="h5" gutterBottom align="center">
           Minor In <br />
           <strong style={{ fontSize: "35px" }}> Product Development</strong>
@@ -194,7 +184,7 @@ const PdiApplicationForm = () => {
         <Grid container spacing={2} sx={{ mb: 2 }}>
           <Grid item xs={12} sm={6}>
             <Typography variant="h6" gutterBottom align="left" sx={{ mb: 2 }}>
-              1. Project Title :
+              Project Title :
             </Typography>
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -214,8 +204,70 @@ const PdiApplicationForm = () => {
       </Paper>
 
       <Paper elevation={3} sx={{ mt: 4, p: 3, pb: 1 }}>
+        <Grid container spacing={2} sx={{ mb: 2 }}>
+          <Grid item xs={12} sm={6}>
+            <Typography variant="h6" gutterBottom align="left" sx={{ mb: 2 }}>
+              <span>Course: </span>
+            </Typography>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              size="small"
+              name="course"
+              type="text"
+              value={data.course}
+              onChange={handleChange("course")}
+              placeholder="e.g. B.tech/M.Tech/Ph.D..."
+              required
+              fullWidth
+              color="primary"
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Typography variant="h6" gutterBottom align="left" sx={{ mb: 2 }}>
+              <span>Session: </span>
+            </Typography>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              size="small"
+              name="session"
+              type="text"
+              value={data.session}
+              onChange={handleChange("session")}
+              placeholder="e.g. 2022-23"
+              required
+              fullWidth
+              color="primary"
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Typography variant="h6" gutterBottom align="left" sx={{ mb: 2 }}>
+              Semester:
+            </Typography>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <FormControl fullWidth size="small">
+              <InputLabel id="leader-Semester-select">Semester</InputLabel>
+              <Select
+                labelId="leader-Semester-select"
+                id="demo-simple-select"
+                required
+                name="Semester"
+                value={data.semester}
+                onChange={handleChange("semester")}
+                label="Domain"
+                fullWidth
+              >
+                <MenuItem value="Summer">Summer</MenuItem>
+                <MenuItem value="Winter">Winter</MenuItem>
+                <MenuItem value="Monsoon">Monsoon</MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
+        </Grid>
         <Typography variant="h6" gutterBottom align="left" sx={{ mb: 2 }}>
-          2. Details of the Applicant(s):
+          Details of the Applicant(s):
         </Typography>
         <Box
           sx={{
@@ -357,12 +409,12 @@ const PdiApplicationForm = () => {
 
       <Paper elevation={3} sx={{ mt: 4, p: 3 }}>
         <Grid container spacing={2} sx={{ mb: 2 }}>
-          <Grid item xs={12}>
+          <Grid item xs={12} sm={6}>
             <Typography variant="h6" gutterBottom align="left" sx={{ mb: 2 }}>
-              3. Faculty Mentor Details (if any):
+              Faculty Mentor Details (if any):
             </Typography>
           </Grid>
-          <Grid item xs={12} sm={4}>
+          <Grid item xs={12} sm={6}>
             <TextField
               name="mentor"
               label="Faculty Mentor Details (if any):"
@@ -377,13 +429,10 @@ const PdiApplicationForm = () => {
             />
           </Grid>
         </Grid>
-      </Paper>
-
-      <Paper elevation={3} sx={{ mt: 4, p: 3 }}>
         <Grid container spacing={2} sx={{ mb: 2 }}>
-          <Grid item xs={12}>
+          <Grid item xs={12} sm={6}>
             <Typography variant="h6" gutterBottom align="left" sx={{ mb: 2 }}>
-              4. Domain/Course (Please indicate one):
+              Domain/Course (Please indicate one):
             </Typography>
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -431,13 +480,10 @@ const PdiApplicationForm = () => {
         <Grid container spacing={2} sx={{ mb: 2 }}>
           <Grid item xs={12}>
             <Typography variant="h6" gutterBottom align="left" sx={{ mb: 2 }}>
-              5. Executive Summary: <br />
-              <span style={{ fontWeight: "lighter" }}>
-                (With a pictorial view of the expected
-                prototype/design/Front-End, if possible) (Max 200 words, clearly
-                write how your idea solves the real-world problem related to the
-                domain)
-              </span>
+              Executive Summary: (With a pictorial view of the expected
+              prototype/design/Front-End, if possible) (Max 200 words, clearly
+              write how your idea solves the real-world problem related to the
+              domain)
             </Typography>
           </Grid>
           <Grid item xs={12}>
@@ -458,13 +504,11 @@ const PdiApplicationForm = () => {
             />
           </Grid>
         </Grid>
-      </Paper>
 
-      <Paper elevation={3} sx={{ mt: 4, p: 3 }}>
         <Grid container spacing={2} sx={{ mb: 2 }}>
           <Grid item xs={12}>
             <Typography variant="h6" gutterBottom align="left" sx={{ mb: 2 }}>
-              6. Objectives (2-3 bullet points):
+              Objectives (2-3 bullet points):
             </Typography>
           </Grid>
           <Grid item xs={12}>
@@ -485,16 +529,11 @@ const PdiApplicationForm = () => {
             />
           </Grid>
         </Grid>
-      </Paper>
 
-      <Paper elevation={3} sx={{ mt: 4, p: 3 }}>
         <Grid container spacing={2} sx={{ mb: 2 }}>
           <Grid item xs={12}>
             <Typography variant="h6" gutterBottom align="left" sx={{ mb: 2 }}>
-              7. Background <br />
-              <span style={{ fontWeight: "lighter" }}>
-                (Origin of the idea and state of art) (Max 400 words):
-              </span>
+              Background (Origin of the idea and state of art) (Max 400 words):
             </Typography>
           </Grid>
           <Grid item xs={12}>
@@ -518,13 +557,11 @@ const PdiApplicationForm = () => {
             <input type="file" />
           </Grid>
         </Grid>
-      </Paper>
 
-      <Paper elevation={3} sx={{ mt: 4, p: 3 }}>
         <Grid container spacing={2} sx={{ mb: 2 }}>
           <Grid item xs={12}>
             <Typography variant="h6" gutterBottom align="left" sx={{ mb: 2 }}>
-              8. Significance/Need of the Project (Max 200 words):
+              Significance/Need of the Project (Max 200 words):
             </Typography>
           </Grid>
           <Grid item xs={12}>
@@ -545,13 +582,11 @@ const PdiApplicationForm = () => {
             />
           </Grid>
         </Grid>
-      </Paper>
 
-      <Paper elevation={3} sx={{ mt: 4, p: 3 }}>
         <Grid container spacing={2} sx={{ mb: 2 }}>
           <Grid item xs={12}>
             <Typography variant="h6" gutterBottom align="left" sx={{ mb: 2 }}>
-              9. Technology Gap (2-3 bullet points):
+              Technology Gap (2-3 bullet points):
             </Typography>
           </Grid>
           <Grid item xs={12}>
@@ -572,13 +607,11 @@ const PdiApplicationForm = () => {
             />
           </Grid>
         </Grid>
-      </Paper>
 
-      <Paper elevation={3} sx={{ mt: 4, p: 3 }}>
         <Grid container spacing={2} sx={{ mb: 2 }}>
           <Grid item xs={12}>
             <Typography variant="h6" gutterBottom align="left" sx={{ mb: 2 }}>
-              10. Methodology (Max 1 page including flow chart etc.):
+              Methodology (Max 1 page including flow chart etc.):
             </Typography>
           </Grid>
           <Grid item xs={12}>
@@ -602,13 +635,11 @@ const PdiApplicationForm = () => {
             <input type="file" />
           </Grid>
         </Grid>
-      </Paper>
 
-      <Paper elevation={3} sx={{ mt: 4, p: 3 }}>
         <Grid container spacing={2} sx={{ mb: 2 }}>
           <Grid item xs={12}>
             <Typography variant="h6" gutterBottom align="left" sx={{ mb: 2 }}>
-              11. Deliverables/Outcomes (in bullet points):
+              Deliverables/Outcomes (in bullet points):
             </Typography>
           </Grid>
           <Grid item xs={12}>
@@ -635,8 +666,8 @@ const PdiApplicationForm = () => {
         <Grid container spacing={2} sx={{ mb: 2 }}>
           <Grid item xs={12}>
             <Typography variant="h6" gutterBottom align="left" sx={{ mb: 2 }}>
-              12. Select the units of NVTIL to be used (you can tick more than
-              one unit):
+              Select the units of NVTIL to be used (you can tick more than one
+              unit):
             </Typography>
           </Grid>
           <Grid item xs={12}>
@@ -686,8 +717,8 @@ const PdiApplicationForm = () => {
         <Grid container spacing={2} sx={{ mb: 2 }}>
           <Grid item xs={12}>
             <Typography variant="h6" gutterBottom align="left" sx={{ mb: 2 }}>
-              13. Please specify the role and responsibility of each team member
-              in the context of the project:
+              Please specify the role and responsibility of each team member in
+              the context of the project:
             </Typography>
           </Grid>
           <Grid item xs={12}>
@@ -714,7 +745,7 @@ const PdiApplicationForm = () => {
         <Grid container spacing={2} sx={{ mb: 2 }}>
           <Grid item xs={12}>
             <Typography variant="h6" gutterBottom align="left" sx={{ mb: 2 }}>
-              14. Expected Expanses:
+              Expected Expanses:
             </Typography>
           </Grid>
           <Grid item xs={4} align="center">
@@ -736,7 +767,7 @@ const PdiApplicationForm = () => {
               name="number"
               type="text"
               value={cost[0].number}
-              onChange={(e) => handleCost(e,0)}
+              onChange={(e) => handleCost(e, 0)}
               required
               fullWidth
               color="primary"
@@ -748,7 +779,7 @@ const PdiApplicationForm = () => {
               type="number"
               name="cost"
               value={cost[0].cost}
-              onChange={(e) => handleCost(e,0)}
+              onChange={(e) => handleCost(e, 0)}
               required
               fullWidth
               color="primary"
@@ -764,7 +795,7 @@ const PdiApplicationForm = () => {
               name="number"
               type="text"
               value={cost[1].number}
-              onChange={(e) => handleCost(e,1)}
+              onChange={(e) => handleCost(e, 1)}
               required
               fullWidth
               color="primary"
@@ -776,7 +807,7 @@ const PdiApplicationForm = () => {
               name="cost"
               type="number"
               value={cost[1].cost}
-              onChange={(e) => handleCost(e,1)}
+              onChange={(e) => handleCost(e, 1)}
               required
               fullWidth
               color="primary"
@@ -791,7 +822,7 @@ const PdiApplicationForm = () => {
               name="number"
               type="text"
               value={cost[2].number}
-              onChange={(e) => handleCost(e,2)}
+              onChange={(e) => handleCost(e, 2)}
               required
               fullWidth
               color="primary"
@@ -803,7 +834,7 @@ const PdiApplicationForm = () => {
               name="cost"
               type="number"
               value={cost[2].cost}
-              onChange={(e) => handleCost(e,2)}
+              onChange={(e) => handleCost(e, 2)}
               required
               fullWidth
               color="primary"
