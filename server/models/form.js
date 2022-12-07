@@ -100,6 +100,16 @@ const formSchema = new Schema(
         },
       },
     ],
+    course: {
+      type: String,
+    },
+    semester: {
+      type: String,
+      enum: ["Summer", "Winter", "Monsoon"]
+    },
+    session: {
+      type: String
+    },
     status: {
       type: String,
       default: "Pending",
