@@ -18,10 +18,10 @@ import {
   Contact,
   Navbar,
   VerifyEmail,
-  FormApplication,
   MentorAcceptedDashboard,
+  PdiApplicationForm,
 } from "./pages";
-import { ViewFormApplication , PdiApplicationForm} from "./components";
+import { ViewFormApplication } from "./components";
 
 function App() {
   return (
@@ -64,8 +64,7 @@ function App() {
             }
           >
             <Route index element={<ClientDashboard />} />
-            <Route path="apply" element={<FormApplication />} />
-            <Route path="pdi" element={<PdiApplicationForm />} />
+            <Route path="apply" element={<PdiApplicationForm />} />
           </Route>
 
           {/* ADMIN PROTECTED ROUTES */}
@@ -106,7 +105,7 @@ function App() {
           pauseOnHover={false}
           pauseOnFocusLoss={false}
           rtl={false}
-          limit={2}
+          limit={1}
           draggable
         />
         <Footer />

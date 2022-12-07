@@ -58,7 +58,7 @@ export const ClientDashboardNavbar = (props) => {
           )}
           <Button
             variant="contained"
-            onClick={() => navigate("pdi")}
+            onClick={() => navigate("apply")}
             sx={{ mr: 2 }}
           >
             Apply

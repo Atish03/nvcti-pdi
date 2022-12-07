@@ -7,7 +7,7 @@ import LogIn from "./login/login.component";
 import NVCTILogo from "./logo/logo.component";
 import CircularLoader from "./loader/circular-loader.component";
 import PreviousApplications from "./previous-status-table/previous-state-table.component";
-import ViewFormApplication from "./view-form/form.page";
+import ViewFormApplication from "./pdi-view-form/form.page";
 import StatusPill from "./status-pill/status-pill.component";
 
 // ADMIN
@@ -19,9 +19,6 @@ import MentorDashboardNavbar from "./dashboard-navbar/mentor-dashboard-navbar.co
 
 // SUPER-ADMIN
 import SuperAdminDashboardNavbar from "./dashboard-navbar/superAdmin-dashboard-navbar.component";
-
-
-import PdiApplicationForm from "./pdi-form/pdi-form";
 
 export {
   StatusPill,
@@ -38,5 +35,4 @@ export {
   Footer,
   ApplicationsList,
   ViewFormApplication,
-  PdiApplicationForm,
 };
