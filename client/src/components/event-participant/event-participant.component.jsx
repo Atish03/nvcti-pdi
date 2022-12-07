@@ -28,6 +28,16 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import customFetch from "../../utils/axios";
 import authHeader from "../../utils/userAuthHeaders";
 
+function descendingComparator(a, b, orderBy="domain") {
+  if (b[orderBy] < a[orderBy]) {
+    return -1;
+  }
+  if (b[orderBy] > a[orderBy]) {
+    return 1;
+  }
+  return 0;
+}
+
 const ApplicationsList = ({ events, role, ...props }) => {
   const selectInitialState = new Array(events.length).fill(false);
   const { token } = useSelector((store) => store?.user?.user);
@@ -193,7 +203,9 @@ const ApplicationsList = ({ events, role, ...props }) => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {events.map((res, idx) => (
+                {events
+                .sort(descendingComparator)
+                .map((res, idx) => (
                   <TableRow hover key={idx}>
                     <TableCell>{idx + 1}</TableCell>
                     <TableCell>{res.projectTitle}</TableCell>

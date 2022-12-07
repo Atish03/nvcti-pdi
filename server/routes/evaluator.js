@@ -10,7 +10,6 @@ const User = require("../models/user");
 const { default: mongoose } = require("mongoose");
 const { sendMail } = require("../utilities/mailsender");
 
-
 const passGenerator = require("../utilities/generateUID");
 
 router.route("/createevaluator").get(
@@ -42,7 +41,7 @@ router.route("/update").post(
   isAdmin,
   catchAsync(async (req, res) => {
     const applicant = await Form.findById(req.body.applicantId);
-    const status =  req.body.status;
+    const status = req.body.status;
     const user = await User.findById(applicant.userId);
     applicant.status = status;
     await applicant.save();
@@ -50,11 +49,15 @@ router.route("/update").post(
     if (user.notifications.length == 10) {
       user.notifications.pop();
     }
-  
+
     if (status.toLowerCase() == "accepted") {
-      user.notifications.unshift(`Your application for ${applicant.projectTitle} is accepted`);
+      user.notifications.unshift(
+        `Your application for ${applicant.projectTitle} is accepted`
+      );
     } else if (status.toLowerCase() == "rejected") {
-      user.notifications.unshift(`Your application for ${applicant.projectTitle} is rejected`);
+      user.notifications.unshift(
+        `Your application for ${applicant.projectTitle} is rejected`
+      );
     }
     user.isNewNotification = true;
     await user.save();
@@ -90,7 +93,8 @@ router.route("/forward").post(
 
       if (alreadyExistEvaluator) {
         applicantIds.forEach((id) => alreadyExistEvaluator.applicants.push(id));
-        textmsg = "please login to the portal to check new applicants. Use the same credentials as before";
+        textmsg =
+          "please login to the portal to check new applicants. Use the same credentials as before";
         await alreadyExistEvaluator.save();
       } else {
         // else create a new evaluator
@@ -117,23 +121,36 @@ router.route("/addcomment").post(
   catchAsync(async (req, res) => {
     const form = await Form.findById(req.body.formId);
     form.comments.push(req.body.comment);
-    await form.save()
+    await form.save();
     res.status(200).send({ msg: "Comment added successfully!" });
   })
-)
+);
 
 router.route("/getacceptedforms").get(
   isLoggedIn,
   isAdmin,
   catchAsync(async (req, res) => {
-    const adminId = "638f5718bfc8f675af102b75"; 
+    const adminId = "638f5718bfc8f675af102b75";
     const admin = await Evaluator.findById(adminId);
-    const resp = await Form.find({"_id": {$in: admin.applicants}, finalist: true});
-    const dummy_resp = [{_id: "dlfddf88f11f", projectTitle: "Dummy title", domain: "Electronics and IoT"},
-    {_id: "dlfddf88f11f", projectTitle: "Tummy title", domain: "Data and Software Technology"}];
-    res.status(200).send({applications: dummy_resp});
+    const resp = await Form.find({
+      _id: { $in: admin.applicants },
+      finalist: true,
+    });
+    const dummy_resp = [
+      {
+        _id: "dlfddf88f11f",
+        projectTitle: "Dummy title",
+        domain: "Electronics and IoT",
+      },
+      {
+        _id: "dlfddf88f11f",
+        projectTitle: "Tummy title",
+        domain: "Data and Software Technology",
+      },
+    ];
+    res.status(200).send({ applications: dummy_resp });
   })
-)
+);
 
 router.route("/forwardadmin").post(
   isLoggedIn,
@@ -144,9 +161,9 @@ router.route("/forwardadmin").post(
       let form = await Form.findById(applicant);
       form.finalist = true;
       await form.save();
-    } 
+    }
     res.status(200).send({ msg: "Applicants forwarded to admin successfully" });
   })
-)
+);
 
 module.exports = router;
