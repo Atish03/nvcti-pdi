@@ -105,10 +105,10 @@ const formSchema = new Schema(
     },
     semester: {
       type: String,
-      enum: ["Summer", "Winter", "Monsoon"],
+      enum: ["Summer", "Winter", "Monsoon"]
     },
     session: {
-      type: String,
+      type: String
     },
     status: {
       type: String,
