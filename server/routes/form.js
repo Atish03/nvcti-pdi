@@ -44,7 +44,10 @@ router.route("/submit").post(
       outcome,
       units,
       roleOfMembers,
-      expenses
+      expenses,
+      course,
+      semester,
+      session
     } = req.body;
     const userId = req.user._id;
     const newForm = new Form({
@@ -61,7 +64,10 @@ router.route("/submit").post(
       outcome,
       units,  
       roleOfMembers,
-      expenses
+      expenses,
+      course,
+      semester,
+      session
     });
     await newForm.save();
     const user = await User.findById(userId);
