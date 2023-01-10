@@ -40,7 +40,6 @@ const PdiApplicationForm = () => {
   const [totalCost, setTotalCost] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const { token } = useSelector((store) => store.user.user);
-
   const [cost, setCost] = useState([
     { number: "", cost: "" },
     { number: "", cost: "" },
@@ -145,14 +144,14 @@ const PdiApplicationForm = () => {
       };
       // To check if the object has all the required fields are filled!
 
-      console.log(obj);
-      // await customFetch.post(`/form/submit`, obj, authHeader(token));
+      // console.log(obj, authHeader(token));
+      await customFetch.post(`/form/submit`, obj, authHeader(token));
       setIsLoading(false);
-      // navigate("/client");
+      navigate("/client");
       toast.success("Form submitted successfully !");
     } catch (err) {
       setIsLoading(false);
-      console.log(err);
+      console.log(err.message);
       toast.error("Something went wrong while submitting !");
     }
   };

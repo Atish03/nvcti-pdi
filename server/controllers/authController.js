@@ -60,10 +60,10 @@ module.exports.register = async (req, res) => {
 
 // route to register mentor
 module.exports.registerMentor = catchAsync(async (req, res) => {
-  const {email, password} = req.body;
+  const { email, password } = req.body;
   const alreadyExists = await User.findOne({ email: email });
-  if(alreadyExists){
-    return res.send({mentor: alreadyExists});
+  if (alreadyExists) {
+    return res.send({ mentor: alreadyExists });
   }
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(password, salt);
@@ -74,7 +74,7 @@ module.exports.registerMentor = catchAsync(async (req, res) => {
     password: hashedPassword,
     position: 2, // to create mentor
   });
-  res.send({mentor: newMentor});
+  res.send({ mentor: newMentor });
 });
 
 module.exports.verifyEmail = async (req, res) => {
@@ -170,7 +170,7 @@ module.exports.login = async (req, res) => {
       expiresIn: process.env.JWT_LIFETIME,
     });
     const prevNotificationState = userInDb.isNewNotification;
-    if(prevNotificationState){
+    if (prevNotificationState) {
       userInDb.isNewNotification = false;
       await userInDb.save();
     }
@@ -200,8 +200,8 @@ module.exports.login = async (req, res) => {
 };
 
 module.exports.getUser = catchAsync(async (req, res) => {
-  const {userId} = req.body;
+  const { userId } = req.body;
   const resp = await User.findById(userId);
-  if(!resp) return res.status(400).send({msg: "User not found !"});
-  return res.status(200).send({user: resp});
+  if (!resp) return res.status(400).send({ msg: "User not found !" });
+  return res.status(200).send({ user: resp });
 });

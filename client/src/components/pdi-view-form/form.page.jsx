@@ -38,97 +38,10 @@ const heads = [
   "Miscellaneous",
 ];
 
-// const data = {
-//   _id: {
-//     $oid: "638f71e6de2ea36d9267d31b",
-//   },
-//   projectTitle: "project for environment variables",
-//   members: [
-//     {
-//       name: "kunal",
-//       email: "kj@kj.com",
-//       departmentAndYear: "btech mechanical engineering",
-//       mobile: "1280193223",
-//       admissionNo: "21je0497",
-//     },
-//     {
-//       name: "kal",
-//       email: "kj@kj.com",
-//       departmentAndYear: "btech",
-//       mobile: "128019",
-//       admissionNo: "21je0497",
-//     },
-//     {
-//       name: "kunal",
-//       email: "kj@k.com",
-//       departmentAndYear: "btech",
-//       mobile: "128019",
-//       admissionNo: "21je97",
-//     },
-//   ],
-//   mentor: "Mr. Pankaj Tripathi, CSE Department",
-//   domain: "Robotic Technology",
-//   summary:
-//     "orem ovident expedita iusto veritatis illo ex et quidem laudantium culpa aliquam tempore quasi, nobis nostrum dolorum consectetur quas aliquid minima eligendi ut error delectus similique. Sint at qui rem quod blanditiis error ratione cum dignissimos aliquam provident corporis quidem vel fugiat mollitia delectus voluptatem illo, adipisci reprehenderit vitae. Minima similique quasi sit veniam hic reiciendis dolore fuga neque itaque magnam voluptatibus ratione, tenetur earum aliquid accusamus, inventore corrupti vel rem quam voluptatum corporis cumque dicta est dolorum. Ipsa omnis quibusdam, optio eum doloremque facere nesciunt, sed, deserunt velit modi molestiae illum labore maiores accusantium commodi. Quia sunt aperiam, quibusdam blanditiis hic inventore dolores amet recusandae id sapiente numquam in, ducimus eos, qui explicabo illo a? Corporis minus recusandae mollitia vel iste voluptas eveniet maxime, facilis, porro repudiandae eum. Dolorum fugit itaque dolores. Rem dolore amet molestiae aut consequuntur facere assumenda provident fugit quas dolorem earum perspiciatis aliquam, asperiores officia itaque alias ullam minima nesciunt quisquam. Corrupti dolor consequuntur ullam quia error numquam debitis nam ratione ea hic qui dolorem odit, perspiciatis deserunt inventore sint nulla minima illo cum quas, illum fuga quod laboriosam! Autem praesentium illum iusto fugit obcaecati deleniti?pr",
-//   objectives:
-//     "sdLorem ovident expedita iusto veritatis illo ex et quidem laudantium culpa aliquam tempore quasi, nobis nostrum dolorum consectetur quas aliquid minima eligendi ut error delectus similique. Sint at qui rem quod blanditiis error ratione cum dignissimos aliquam provident corporis quidem vel fugiat mollitia delectus voluptatem illo, adipisci reprehenderit vitae. Minima similique quasi sit veniam hic reiciendis dolore fuga neque itaque magnam voluptatibus ratione, tenetur earum aliquid accusamus, inventore corrupti vel rem quam voluptatum corporis cumque dicta est dolorum. Ipsa omnis quibusdam, optio eum doloremque facere nesciunt, sed, deserunt velit modi molestiae illum labore maiores accusantium commodi. Quia sunt aperiam, quibusdam blanditiis hic inventore dolores amet recusandae id sapiente numquam in, ducimus eos, qui explicabo illo a? Corporis minus recusandae mollitia vel iste voluptas eveniet maxime, facilis, porro repudiandae eum. Dolorum fugit itaque dolores. Rem dolore amet molestiae aut consequuntur facere assumenda provident fugit quas dolorem earum perspiciatis aliquam, asperiores officia itaque alias ullam minima nesciunt quisquam. Corrupti dolor consequuntur ullam quia error numquam debitis nam ratione ea hic qui dolorem odit, perspiciatis deserunt inventore sint nulla minima illo cum quas, illum fuga quod laboriosam! Autem praesentium illum iusto fugit obcaecati deleniti?pr itaque?ds",
-//   background:
-//     "Lorem ovident expedita iusto veritatis illo ex et quidem laudantium culpa aliquam tempore quasi, nobis nostrum dolorum consectetur quas aliquid minima eligendi ut error delectus similique. Sint at qui rem quod blanditiis error ratione cum dignissimos aliquam provident corporis quidem vel fugiat mollitia delectus voluptatem illo, adipisci reprehenderit vitae. Minima similique quasi sit veniam hic reiciendis dolore fuga neque itaque magnam voluptatibus ratione, tenetur earum aliquid accusamus, inventore corrupti vel rem quam voluptatum corporis cumque dicta est dolorum. Ipsa omnis quibusdam, optio eum doloremque facere nesciunt, sed, deserunt velit modi molestiae illum labore maiores accusantium commodi. Quia sunt aperiam, quibusdam blanditiis hic inventore dolores amet recusandae id sapiente numquam in, ducimus eos, qui explicabo illo a? Corporis minus recusandae mollitia vel iste voluptas eveniet maxime, facilis, porro repudiandae eum. Dolorum fugit itaque dolores. Rem dolore amet molestiae aut consequuntur facere assumenda provident fugit quas dolorem earum perspiciatis aliquam, asperiores officia itaque alias ullam minima nesciunt quisquam. Corrupti dolor consequuntur ullam quia error numquam debitis nam ratione ea hic qui dolorem odit, perspiciatis deserunt inventore sint nulla minima illo cum quas, illum fuga quod laboriosam! Autem praesentium illum iusto fugit obcaecati deleniti?pr itaque?s",
-//   significance:
-//     "sorem ovident expedita iusto veritatis illo ex et quidem laudantium culpa aliquam tempore quasi, nobis nostrum dolorum consectetur quas aliquid minima eligendi ut error delectus similique. Sint at qui rem quod blanditiis error ratione cum dignissimos aliquam provident corporis quidem vel fugiat mollitia delectus voluptatem illo, adipisci reprehenderit vitae. Minima similique quasi sit veniam hic reiciendis dolore fuga neque itaque magnam voluptatibus ratione, tenetur earum aliquid accusamus, inventore corrupti vel rem quam voluptatum corporis cumque dicta est dolorum. Ipsa omnis quibusdam, optio eum doloremque facere nesciunt, sed, deserunt velit modi molestiae illum labore maiores accusantium commodi. Quia sunt aperiam, quibusdam blanditiis hic inventore dolores amet recusandae id sapiente numquam in, ducimus eos, qui explicabo illo a? Corporis minus recusandae mollitia vel iste voluptas eveniet maxime, facilis, porro repudiandae eum. Dolorum fugit itaque dolores. Rem dolore amet molestiae aut consequuntur facere assumenda provident fugit quas dolorem earum perspiciatis aliquam, asperiores officia itaque alias ullam minima nesciunt quisquam. Corrupti dolor consequuntur ullam quia error numquam debitis nam ratione ea hic qui dolorem odit, perspiciatis deserunt inventore sint nulla minima illo cum quas, illum fuga quod laboriosam! Autem praesentium illum iusto fugit obcaecati deleniti?pr itaque?d",
-//   technologyGap:
-//     "dorem ovident expedita iusto veritatis illo ex et quidem laudantium culpa aliquam tempore quasi, nobis nostrum dolorum consectetur quas aliquid minima eligendi ut error delectus similique. Sint at qui rem quod blanditiis error ratione cum dignissimos aliquam provident corporis quidem vel fugiat mollitia delectus voluptatem illo, adipisci reprehenderit vitae. Minima similique quasi sit veniam hic reiciendis dolore fuga neque itaque magnam voluptatibus ratione, tenetur earum aliquid accusamus, inventore corrupti vel rem quam voluptatum corporis cumque dicta est dolorum. Ipsa omnis quibusdam, optio eum doloremque facere nesciunt, sed, deserunt velit modi molestiae illum labore maiores accusantium commodi. Quia sunt aperiam, quibusdam blanditiis hic inventore dolores amet recusandae id sapiente numquam in, ducimus eos, qui explicabo illo a? Corporis minus recusandae mollitia vel iste voluptas eveniet maxime, facilis, porro repudiandae eum. Dolorum fugit itaque dolores. Rem dolore amet molestiae aut consequuntur facere assumenda provident fugit quas dolorem earum perspiciatis aliquam, asperiores officia itaque alias ullam minima nesciunt quisquam. Corrupti dolor consequuntur ullam quia error numquam debitis nam ratione ea hic qui dolorem odit, perspiciatis deserunt inventore sint nulla minima illo cum quas, illum fuga quod laboriosam! Autem praesentium illum iusto fugit obcaecati deleniti?pr itaque?",
-//   methodology:
-//     "ovident expedita iusto veritatis illo ex et quidem laudantium culpa aliquam tempore quasi, nobis nostrum dolorum consectetur quas aliquid minima eligendi ut error delectus similique. Sint at qui rem quod blanditiis error ratione cum dignissimos aliquam provident corporis quidem vel fugiat mollitia delectus voluptatem illo, adipisci reprehenderit vitae. Minima similique quasi sit veniam hic reiciendis dolore fuga neque itaque magnam voluptatibus ratione, tenetur earum aliquid accusamus, inventore corrupti vel rem quam voluptatum corporis cumque dicta est dolorum. Ipsa omnis quibusdam, optio eum doloremque facere nesciunt, sed, deserunt velit modi molestiae illum labore maiores accusantium commodi. Quia sunt aperiam, quibusdam blanditiis hic inventore dolores amet recusandae id sapiente numquam in, ducimus eos, qui explicabo illo a? Corporis minus recusandae mollitia vel iste voluptas eveniet maxime, facilis, porro repudiandae eum. Dolorum fugit itaque dolores. Rem dolore amet molestiae aut consequuntur facere assumenda provident fugit quas dolorem earum perspiciatis aliquam, asperiores officia itaque alias ullam minima nesciunt quisquam. Corrupti dolor consequuntur ullam quia error numquam debitis nam ratione ea hic qui dolorem odit, perspiciatis deserunt inventore sint nulla minima illo cum quas, illum fuga quod laboriosam! Autem praesentium illum iusto fugit obcaecati deleniti?pr",
-//   outcome:
-//     "ovident expedita iusto veritatis illo ex et quidem laudantium culpa aliquam tempore quasi, nobis nostrum dolorum consectetur quas aliquid minima eligendi ut error delectus similique. Sint at qui rem quod blanditiis error ratione cum dignissimos aliquam provident corporis quidem vel fugiat mollitia delectus voluptatem illo, adipisci reprehenderit vitae. Minima similique quasi sit veniam hic reiciendis dolore fuga neque itaque magnam voluptatibus ratione, tenetur earum aliquid accusamus, inventore corrupti vel rem quam voluptatum corporis cumque dicta est dolorum. Ipsa omnis quibusdam, optio eum doloremque facere nesciunt, sed, deserunt velit modi molestiae illum labore maiores accusantium commodi. Quia sunt aperiam, quibusdam blanditiis hic inventore dolores amet recusandae id sapiente numquam in, ducimus eos, qui explicabo illo a? Corporis minus recusandae mollitia vel iste voluptas eveniet maxime, facilis, porro repudiandae eum. Dolorum fugit itaque dolores. Rem dolore amet molestiae aut consequuntur facere assumenda provident fugit quas dolorem earum perspiciatis aliquam, asperiores officia itaque alias ullam minima nesciunt quisquam. Corrupti dolor consequuntur ullam quia error numquam debitis nam ratione ea hic qui dolorem odit, perspiciatis deserunt inventore sint nulla minima illo cum quas, illum fuga quod laboriosam! Autem praesentium illum iusto fugit obcaecati deleniti?prsd",
-//   units: ["Electronics Circuits and IoT Unit", "Robotics and Automation Unit"],
-//   roleOfMembers:
-//     "ovident expedita iusto veritatis illo ex et quidem laudantium culpa aliquam tempore quasi, nobis nostrum dolorum consectetur quas aliquid minima eligendi ut error delectus similique. Sint at qui rem quod blanditiis error ratione cum dignissimos aliquam provident corporis quidem vel fugiat mollitia delectus voluptatem illo, adipisci reprehenderit vitae. Minima similique quasi sit veniam hic reiciendis dolore fuga neque itaque magnam voluptatibus ratione, tenetur earum aliquid accusamus, inventore corrupti vel rem quam voluptatum corporis cumque dicta est dolorum. Ipsa omnis quibusdam, optio eum doloremque facere nesciunt, sed, deserunt velit modi molestiae illum labore maiores accusantium commodi. Quia sunt aperiam, quibusdam blanditiis hic inventore dolores amet recusandae id sapiente numquam in, ducimus eos, qui explicabo illo a? Corporis minus recusandae mollitia vel iste voluptas eveniet maxime, facilis, porro repudiandae eum. Dolorum fugit itaque dolores. Rem dolore amet molestiae aut consequuntur facere assumenda provident fugit quas dolorem earum perspiciatis aliquam, asperiores officia itaque alias ullam minima nesciunt quisquam. Corrupti dolor consequuntur ullam quia error numquam debitis nam ratione ea hic qui dolorem odit, perspiciatis deserunt inventore sint nulla minima illo cum quas, illum fuga quod laboriosam! Autem praesentium illum iusto fugit obcaecati deleniti?pr",
-//   expenses: [
-//     {
-//       number: "21",
-//       cost: 1212,
-//       _id: {
-//         $oid: "638f71e6de2ea36d9267d31c",
-//       },
-//     },
-//     {
-//       number: "12",
-//       cost: 12,
-//       _id: {
-//         $oid: "638f71e6de2ea36d9267d31d",
-//       },
-//     },
-//     {
-//       number: "12",
-//       cost: 11,
-//       _id: {
-//         $oid: "638f71e6de2ea36d9267d31e",
-//       },
-//     },
-//   ],
-//   status: "Pending",
-//   comments: [],
-//   finalist: false,
-//   created_at: {
-//     $date: {
-//       $numberLong: "1670345190174",
-//     },
-//   },
-//   updated_at: {
-//     $date: {
-//       $numberLong: "1670345190174",
-//     },
-//   },
-//   __v: 0,
-// };
-
-const formId = "63907d6fcf523eb2a629900a"; //! Need to be Changed!!
+// const formId = "63907d6fcf523eb2a629900a"; //! Need to be Changed!!
 
 const ViewFormApplication = () => {
-  // getting the document
-  // const { formId } = useParams();
+  const { formId } = useParams();
   const navigate = useNavigate();
   const { position, token } = useSelector((store) => store.user.user);
   console.log("userPos", position);
