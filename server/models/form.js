@@ -114,6 +114,9 @@ const formSchema = new Schema(
       type: String,
       default: "Pending",
     },
+    department: {
+      type: String
+    },
     comments: [
       {
         type: String,
